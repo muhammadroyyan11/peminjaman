@@ -1,50 +1,52 @@
-<section class="row flexbox-container">
-    <div class="col-xl-8 col-11 d-flex justify-content-center">
-        <div class="card bg-authentication rounded-0 mb-0">
-            <div class="row m-0">
-                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                    <img src="<?= base_url() ?>assets/app-assets/images/pages/login.png" alt="branding logo">
-                </div>
-                <div class="col-lg-6 col-12 p-0">
-                    <div class="card rounded-0 mb-0 px-2">
-                        <div class="card-header pb-1">
-                            <div class="card-title">
-                                <h4 class="mb-0">Login</h4>
-                            </div>
-                        </div>
-                        <p class="px-2">Welcome back, please login to your account.</p>
-                        <div class="card-content">
-                            <div class="card-body pt-1">
-                                <?= $this->session->flashdata('pesan'); ?>
-                                <?= form_open('', ['class' => 'user']); ?>
-                                <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                    <input type="text" class="form-control" id="user-name" placeholder="Username" name="username" required autocomplete="off">
-                                    <div class="form-control-position">
-                                        <i class="feather icon-user"></i>
-                                    </div>
-                                    <label for="user-name">Username</label>
-                                </fieldset>
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="<?= base_url() ?>assets/index2.html" class="h1"><b>Admin</b>LTE</a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
 
-                                <fieldset class="form-label-group position-relative has-icon-left">
-                                    <input type="password" class="form-control" id="user-password" placeholder="Password" name="password" required autocomplete="off">
-                                    <div class="form-control-position">
-                                        <i class="feather icon-lock"></i>
-                                    </div>
-                                    <label for="user-password">Password</label>
-                                </fieldset>
-                                <a href="<?= site_url('admin/auth/register') ?>" class="btn btn-outline-primary float-left btn-inline">Register</a>
-                                <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
-                                <?= form_close(); ?>
-                            </div>
-                        </div>
-                        <div class="login-footer">
-                            <div class="divider">
-                                <div class="divider-text">&copy; Kobis.id</div>
-                            </div>
+            <form action="" method="post">
+                <div class="input-group mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                Remember Me
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <!-- <p class="mb-0">
+                <a href="register.html" class="text-center">Register a new membership</a>
+            </p> -->
         </div>
+        <!-- /.card-body -->
     </div>
-</section>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->

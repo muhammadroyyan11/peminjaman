@@ -23,7 +23,7 @@ class Auth extends CI_Controller
     {
         $this->_has_login();
 
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == false) {
@@ -32,11 +32,11 @@ class Auth extends CI_Controller
         } else {
             $input = $this->input->post(null, true);
 
-            $cek_username = $this->auth->cek_username($input['username']);
-            if ($cek_username > 0) {
-                $password = $this->auth->get_password($input['username']);
+            $cek_email = $this->auth->cek_email($input['email']);
+            if ($cek_email > 0) {
+                $password = $this->auth->get_password($input['email']);
                 if (password_verify($input['password'], $password)) {
-                    $user_db = $this->auth->userdata($input['username']);
+                    $user_db = $this->auth->userdata($input['email']);
                     if ($user_db['is_active'] != 1) {
                         set_pesan('akun anda belum aktif/dinonaktifkan. Silahkan hubungi admin.', false);
                         redirect('auth');
@@ -54,7 +54,7 @@ class Auth extends CI_Controller
                     redirect('auth');
                 }
             } else {
-                set_pesan('username belum terdaftar', false);
+                set_pesan('email belum terdaftar', false);
                 redirect('auth');
             }
         }
@@ -70,7 +70,7 @@ class Auth extends CI_Controller
 
     public function register()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]|alpha_numeric');
+        $this->form_validation->set_rules('email', 'email', 'required|trim|is_unique[user.email]|alpha_numeric');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[3]|trim');
         $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'matches[password]|trim');
         $this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|trim');
