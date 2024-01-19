@@ -19,7 +19,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <?php echo form_open_multipart('admin/tambah_barang_aksi', array('role' => 'form', 'id' => 'uploadForm')) ?>
+    <?= form_open_multipart('barang/add_action', array('role' => 'form', 'id' => 'uploadForm')) ?>
     <div class="row">
         <div class="col-md-6">
             <div class="card card-info">
@@ -32,26 +32,16 @@
                 <div class="card-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-8">
                                 <label>Nama Barang</label>
                                 <input name="nama_barang" placeholder="Nama Barang" type="text" class="form-control">
                             </div>
-
+							<div class="col-4">
+								<label>Stok</label>
+								<input name="stok" placeholder="Stok Barang" type="number" class="form-control">
+							</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label>Merk</label>
-                                <input name="merk" placeholder="Merk" type="text" class="form-control">
-                            </div>
-                            <div class="col">
-                                <label>Stok</label>
-                                <input name="stok" placeholder="Jumlah Stok Barang" type="number" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
@@ -93,7 +83,7 @@
                     <div class="form-group">
                         <label>Upload Foto</label>
                     </div>
-                    <input type="file" name="foto" id="file" require>
+                    <input type="file" name="gambarFile" id="file" require>
                     <div class="kotakUp" id="gambar">
 
                     </div>
@@ -107,7 +97,7 @@
         </div>
     </div>
     <!-- /.row -->
-    <?php echo form_close(); ?>
+    <?= form_close(); ?>
 </section>
 <!-- /.content -->
 <script>

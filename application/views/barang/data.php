@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <!-- <h3 class="card-title">DataTable with default features</h3> -->
-                    <a href="<?= site_url('barang/add')?>" class="btn btn-info float-right"><i class="fa fa-plus">
+                    <a href="<?= site_url('barang/add') ?>" class="btn btn-info float-right"><i class="fa fa-plus">
                         </i> Tambah Barang
                     </a><br>
                 </div>
@@ -29,23 +29,31 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kode</th>
+								<th>QR</th>
                                 <th>Nama Barang</th>
-                                <th>Merk</th>
+                                <th>Stok</th>
                                 <th>Status</th>
-                                <th>QR</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                                <td>Trident</td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($barang as $key => $data) { ?>
+                                <tr>
+                                    <td><?= $no++?></td>
+                                    <td><?= $data['kode_barang'] ?></td>
+									<td><img src="<?= base_url()?>assets/uploads/qrcode/<?= $data['qr_code']?>" width="120" height="120"></td>
+                                    <td><?= $data['nama_barang'] ?></td>
+                                    <td><?= $data['stok'] ?></td>
+                                    <td><?= $data['status'] ?></td>
+                                    <td>
+										<a href="#" type="button" class="btn bg-gradient-primary">EDIT</a>
+										<a href="<?= site_url('barang/delete')?>" onclick="return confirm('Yakin ingin menghapus data?')"  type="button" class="btn bg-gradient-danger">DELETE</a>
+									</td>
+                                </tr>
+                            <?php }
+                            ?>
                         </tbody>
                     </table>
                 </div>

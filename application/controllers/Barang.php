@@ -15,7 +15,8 @@ class Barang extends CI_Controller
     public function index()
     {
         $data = [
-            'title'       => 'Data Barang',
+            'title'         => 'Data Barang',
+            'barang'        => $this->base->get('barang')->result_array()
         ];
         $this->template->load('template', 'barang/data', $data);
     }
@@ -30,6 +31,8 @@ class Barang extends CI_Controller
 
     public function add_action()
     {
+        require 'vendor/autoload.php';
+
         $post = $this->input->post(null, true);
 
         $kode = $this->base->createCode();
@@ -43,15 +46,38 @@ class Barang extends CI_Controller
 
         if (@$_FILES['gambarFile']['name'] != null) {
             if ($this->upload->do_upload('gambarFile')) {
+                $post['gambarFile'] = $this->upload->data('file_name');
+				$this->load->library('ciqrcode');
+
+				//create QRCODE
+				$config['cacheable']    		= true;
+				$config['cachedir']             = './assets/';
+				$config['errorlog']             = './assets/';
+				$config['imagedir']             = './assets/uploads/qrcode/';
+				$config['quality']              = true;
+				$config['size']                 = '1024';
+				$config['black']                = array(224,255,255);
+				$config['white']                = array(70,130,180);
+				$this->ciqrcode->initialize($config);
+
+				$qrCode= $kode . ' - ' . $post['nama_barang'] . '.png';
+
+				$params['data'] = $kode;
+				$params['level'] = 'H';
+				$params['size'] = 10;
+				$params['savename'] = FCPATH.$config['imagedir'].$qrCode;
+				$this->ciqrcode->generate($params);
+
                 $params = [
-                    'kode'          => $kode,
+                    'kode_barang'   => $kode,
+                    'qr_code'       => $qrCode,
                     'nama_barang'   => $post['nama_barang'],
-                    'merk'          => $post['merk'],
                     'stok'          => $post['stok'],
                     'kategori'      => $post['kategori'],
                     'tgl_masuk'     => $post['tgl_masuk'],
                     'spesifikasi'   => $post['spesifikasi'],
-                    'foto'          => $post['foto']
+                    'foto'          => $post['gambarFile'],
+                    'status'        => 0
                 ];
 
                 $this->base->add('barang', $params);
@@ -67,9 +93,6 @@ class Barang extends CI_Controller
         } else {
             echo 'error';
         }
-
-
-
         redirect('barang');
     }
 }
