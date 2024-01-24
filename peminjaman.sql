@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jan 2024 pada 11.03
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.28
+-- Generation Time: Jan 24, 2024 at 04:55 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `aktifitas_pinjam`
+-- Table structure for table `aktifitas_pinjam`
 --
 
 CREATE TABLE `aktifitas_pinjam` (
@@ -41,7 +41,7 @@ CREATE TABLE `aktifitas_pinjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `aktifitas_pinjam`
+-- Dumping data for table `aktifitas_pinjam`
 --
 
 INSERT INTO `aktifitas_pinjam` (`id`, `kd_pjm`, `nip`, `kd_brg`, `tgl_pjm`, `estimate_kmbl`, `tgl_kmbl`, `ptgs_pjm`, `ptg_kmbl`, `status`) VALUES
@@ -54,7 +54,7 @@ INSERT INTO `aktifitas_pinjam` (`id`, `kd_pjm`, `nip`, `kd_brg`, `tgl_pjm`, `est
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun_admin`
+-- Table structure for table `akun_admin`
 --
 
 CREATE TABLE `akun_admin` (
@@ -67,7 +67,7 @@ CREATE TABLE `akun_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akun_admin`
+-- Dumping data for table `akun_admin`
 --
 
 INSERT INTO `akun_admin` (`id`, `username`, `level_user`, `password`, `token`, `status`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `akun_admin` (`id`, `username`, `level_user`, `password`, `token`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `anggota`
+-- Table structure for table `anggota`
 --
 
 CREATE TABLE `anggota` (
@@ -92,7 +92,7 @@ CREATE TABLE `anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `anggota`
+-- Dumping data for table `anggota`
 --
 
 INSERT INTO `anggota` (`id`, `nip`, `nama`, `jabatan`, `pangkat_golongan`, `seksi`, `tgl_lahir`, `foto`) VALUES
@@ -105,40 +105,34 @@ INSERT INTO `anggota` (`id`, `nip`, `nama`, `jabatan`, `pangkat_golongan`, `seks
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
   `kode_barang` varchar(50) NOT NULL,
-  `qr_code` varchar(100) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
   `stok` int(11) NOT NULL,
   `kategori` varchar(20) NOT NULL,
   `tgl_masuk` date NOT NULL,
   `spesifikasi` varchar(50) NOT NULL,
   `status` int(1) NOT NULL,
-  `foto` varchar(30) NOT NULL
+  `foto` varchar(30) NOT NULL,
+  `qrcode` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `kode_barang`, `qr_code`, `nama_barang`, `stok`, `kategori`, `tgl_masuk`, `spesifikasi`, `status`, `foto`) VALUES
-(38, 'BR000001', 'BR00008 - barang Coba 2.png', 'Kabel Roll', 0, 'elektronik', '2023-03-28', 'Kabel Roll 7 Meter', 0, 'kabel.jpg'),
-(39, 'BR000002', 'BR00008 - barang Coba 2.png', 'Laptop', 0, 'elektronik', '2023-03-28', 'Laptop Lenovo Core i7', 1, 'Lneovo.jpg'),
-(40, 'BR000003', 'BR00008 - barang Coba 2.png', 'LCD', 0, 'elektronik', '2023-03-28', 'LCD Epson EB-X500', 0, 'EPSON-EB-X500-3.jpeg'),
-(41, 'BR000004', 'BR00008 - barang Coba 2.png', 'Sound Portable', 0, 'elektronik', '2023-03-28', 'sound Portable BoB Audio', 1, 'BOB_AUDIO.jpg'),
-(42, 'BR000005', 'BR00008 - barang Coba 2.png', 'Sound System', 0, 'elektronik', '2023-03-28', 'Sound System Active Huper', 0, 'sound_system_huper.jpg'),
-(43, 'BR000006', 'BR00008 - barang Coba 2.png', 'Kursi Lesehan', 0, 'lain-lain', '2023-03-28', 'Kursi Sandaran Warna Biru', 0, 'kursi_lesehan_biru.png'),
-(44, 'BR00007', 'BR00008 - barang Coba 2.png', 'barang Coba', 22, 'elektronik', '2024-01-17', 'asd', 0, 'barang-240118-BR000077.jpg'),
-(45, 'BR00008', 'BR00008 - barang Coba 2.png', 'barang Coba 2', 22, 'elektronik', '2024-01-09', 'asasdasd', 0, 'barang-240119-BR000081.jpg');
+INSERT INTO `barang` (`id`, `kode_barang`, `nama_barang`, `stok`, `kategori`, `tgl_masuk`, `spesifikasi`, `status`, `foto`, `qrcode`) VALUES
+(44, 'BR00001', 'saaaxx', 222, 'teknis', '2024-01-23', 'asdasd', 1, 'barang-240124-BR00001.jpg', 'BR00001 - s.png'),
+(45, 'BR00002', 'saasx', 2, 'teknis', '2024-01-23', 'asdasd', 1, 'barang-240124-BR00001.jpg', 'BR00001 - s.png');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `contact`
+-- Table structure for table `contact`
 --
 
 CREATE TABLE `contact` (
@@ -150,7 +144,7 @@ CREATE TABLE `contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `contact`
+-- Dumping data for table `contact`
 --
 
 INSERT INTO `contact` (`id`, `tgl`, `nama`, `email`, `isi`) VALUES
@@ -159,7 +153,7 @@ INSERT INTO `contact` (`id`, `tgl`, `nama`, `email`, `isi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kembali_brg`
+-- Table structure for table `kembali_brg`
 --
 
 CREATE TABLE `kembali_brg` (
@@ -175,7 +169,7 @@ CREATE TABLE `kembali_brg` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pinjam_barang`
+-- Table structure for table `pinjam_barang`
 --
 
 CREATE TABLE `pinjam_barang` (
@@ -195,7 +189,7 @@ CREATE TABLE `pinjam_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pinjam_barang`
+-- Dumping data for table `pinjam_barang`
 --
 
 INSERT INTO `pinjam_barang` (`id`, `kd_pinjam`, `nip`, `nama`, `jabatan`, `seksi`, `kode_barang`, `nama_barang`, `jml_pinjam`, `tgl_pinjam`, `tgl_kembali`, `petugas`, `status`) VALUES
@@ -207,7 +201,7 @@ INSERT INTO `pinjam_barang` (`id`, `kd_pinjam`, `nip`, `nama`, `jabatan`, `seksi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -224,12 +218,12 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `email`, `no_telp`, `role`, `password`, `created_at`, `foto`, `is_active`) VALUES
-(1, 'Administrator', 'admin', 'admin@admin.com', '025123456789', 1, '$2a$12$ZnO.iHwKlaCQlaXMdPUO/uTy3vVbrMnd9sLT8LosfuDpTDPqbYubu', 1568689561, 'd5f22535b639d55be7d099a7315e1f7f.png', 1),
-(26, 'Muhammad Royyan Zamzami', 'royyan', 'royyanmz87@gmail.com', '085649888272', 2, '$2y$10$ae0EvtbCbaFPtcKIk6HQ5O8f21UFA12XR8S2QPZRKkvtqjg7x12kK', 1686247190, 'user.png', 1),
+(1, 'Administrator', 'admin', 'admin@admin.com', '025123456789', 1, '$2a$12$qILytwrKWcyG/bQShwya1ewhttVMq31JpqL1kY3eBw6acZunx4aYK', 1568689561, 'd5f22535b639d55be7d099a7315e1f7f.png', 1),
+(26, 'Muhammad Royyan Zamzami', 'royyan', 'user@user.com', '085649888272', 2, '$2a$12$qILytwrKWcyG/bQShwya1ewhttVMq31JpqL1kY3eBw6acZunx4aYK', 1686247190, 'user.png', 1),
 (27, 'Rayhan', 'rayhan', 'rayhan@mail.com', '1298390123', 2, '$2y$10$y.zHZcjb57.YWWw8N08.D.X/GuwrZ/zGHa0JWfVj5gNOQWo3sFxi.', 1686254031, 'user.png', 1);
 
 --
@@ -237,103 +231,103 @@ INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `email`, `no_telp`, `
 --
 
 --
--- Indeks untuk tabel `aktifitas_pinjam`
+-- Indexes for table `aktifitas_pinjam`
 --
 ALTER TABLE `aktifitas_pinjam`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `akun_admin`
+-- Indexes for table `akun_admin`
 --
 ALTER TABLE `akun_admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `anggota`
+-- Indexes for table `anggota`
 --
 ALTER TABLE `anggota`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nip` (`nip`);
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kode_barang` (`kode_barang`);
 
 --
--- Indeks untuk tabel `contact`
+-- Indexes for table `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kembali_brg`
+-- Indexes for table `kembali_brg`
 --
 ALTER TABLE `kembali_brg`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pinjam_barang`
+-- Indexes for table `pinjam_barang`
 --
 ALTER TABLE `pinjam_barang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `aktifitas_pinjam`
+-- AUTO_INCREMENT for table `aktifitas_pinjam`
 --
 ALTER TABLE `aktifitas_pinjam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
--- AUTO_INCREMENT untuk tabel `akun_admin`
+-- AUTO_INCREMENT for table `akun_admin`
 --
 ALTER TABLE `akun_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `anggota`
+-- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `barang`
+-- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT untuk tabel `contact`
+-- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `kembali_brg`
+-- AUTO_INCREMENT for table `kembali_brg`
 --
 ALTER TABLE `kembali_brg`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT untuk tabel `pinjam_barang`
+-- AUTO_INCREMENT for table `pinjam_barang`
 --
 ALTER TABLE `pinjam_barang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;

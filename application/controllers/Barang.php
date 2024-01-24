@@ -31,7 +31,7 @@ class Barang extends CI_Controller
 
     public function add_action()
     {
-        require 'vendor/autoload.php';
+        // require 'vendor/autoload.php';
 
         $post = $this->input->post(null, true);
 
@@ -47,30 +47,30 @@ class Barang extends CI_Controller
         if (@$_FILES['gambarFile']['name'] != null) {
             if ($this->upload->do_upload('gambarFile')) {
                 $post['gambarFile'] = $this->upload->data('file_name');
-				$this->load->library('ciqrcode');
+                $this->load->library('ciqrcode');
 
-				//create QRCODE
-				$config['cacheable']    		= true;
-				$config['cachedir']             = './assets/';
-				$config['errorlog']             = './assets/';
-				$config['imagedir']             = './assets/uploads/qrcode/';
-				$config['quality']              = true;
-				$config['size']                 = '1024';
-				$config['black']                = array(224,255,255);
-				$config['white']                = array(70,130,180);
-				$this->ciqrcode->initialize($config);
+                //create QRCODE
+                $config['cacheable']            = true;
+                $config['cachedir']             = './assets/';
+                $config['errorlog']             = './assets/';
+                $config['imagedir']             = './assets/uploads/qrcode/';
+                $config['quality']              = true;
+                $config['size']                 = '1024';
+                $config['black']                = array(224, 255, 255);
+                $config['white']                = array(70, 130, 180);
+                $this->ciqrcode->initialize($config);
 
-				$qrCode= $kode . ' - ' . $post['nama_barang'] . '.png';
+                $qrCode = $kode . ' - ' . $post['nama_barang'] . '.png';
 
-				$params['data'] = $kode;
-				$params['level'] = 'H';
-				$params['size'] = 10;
-				$params['savename'] = FCPATH.$config['imagedir'].$qrCode;
-				$this->ciqrcode->generate($params);
+                $params['data'] = $kode;
+                $params['level'] = 'H';
+                $params['size'] = 10;
+                $params['savename'] = FCPATH . $config['imagedir'] . $qrCode;
+                $this->ciqrcode->generate($params);
 
                 $params = [
                     'kode_barang'   => $kode,
-                    'qr_code'       => $qrCode,
+                    'qrcode'        => $qrCode,
                     'nama_barang'   => $post['nama_barang'],
                     'stok'          => $post['stok'],
                     'kategori'      => $post['kategori'],
@@ -92,6 +92,78 @@ class Barang extends CI_Controller
             }
         } else {
             echo 'error';
+        }
+        redirect('barang');
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'title'       => 'Edit Data Barang',
+            'row'         => $this->base->get('barang',['id' => $id])->row()
+        ];
+        $this->template->load('template', 'barang/edit', $data);
+    }
+
+    public function edit_action($id)
+    {
+        $post = $this->input->post(null, true);
+        $getTemp = $this->base->get('barang', ['id' => $id])->row();
+
+        $config['upload_path']          = './assets/uploads/barang/';
+        $config['allowed_types']        = 'jpg|jpeg|png|gif|';
+        $config['max_height']           = 10000;
+        $config['file_name']            = 'barang-' . date('ymd') . '-' . $getTemp->kode_barang;
+
+        $this->load->library('upload', $config);
+
+        if (@$_FILES['gambarFile']['name'] != null) {
+            if ($this->upload->do_upload('gambarFile')) {
+                $post['gambarFile'] = $this->upload->data('file_name');
+                $this->load->library('ciqrcode');
+
+                $params = [
+                    'nama_barang'   => $post['nama_barang'],
+                    'stok'          => $post['stok'],
+                    'kategori'      => $post['kategori'],
+                    'tgl_masuk'     => $post['tgl_masuk'],
+                    'spesifikasi'   => $post['spesifikasi'],
+                    'foto'          => $post['gambarFile'],
+                ];
+
+                $this->base->edit('barang', $params, ['id' => $id]);
+
+                if ($this->db->affected_rows() > 0) {
+                    set_pesan('Data berhasil ditambahkan');
+                } else {
+                    set_pesan('Terjadi kesalahan', FALSE);
+                }
+            } else {
+                echo 'error';
+            }
+        } else {
+            $params = [
+                'nama_barang'   => $post['nama_barang'],
+                'stok'          => $post['stok'],
+                'kategori'      => $post['kategori'],
+                'tgl_masuk'     => $post['tgl_masuk'],
+                'spesifikasi'   => $post['spesifikasi'],
+            ];
+
+            $this->base->edit('barang', $params, ['id' => $id]);
+
+            if ($this->db->affected_rows() > 0) {
+                set_pesan('Data berhasil ditambahkan');
+            } else {
+                set_pesan('Terjadi kesalahan', FALSE);
+            }
+        }
+
+
+        if ($getTemp->stok > '0') {
+            $paramsStatus = ['status' => 0];
+
+            $this->base->edit('barang', $paramsStatus, ['id' => $id]);
         }
         redirect('barang');
     }

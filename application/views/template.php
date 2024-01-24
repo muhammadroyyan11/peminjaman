@@ -203,11 +203,18 @@
                                 </p>
                             </a>
                         </li>
+                        <?php
+                        if (userdata('role') == 1) {
+                            $barag = 'Data Barang';
+                        } else {
+                            $barang = 'Pinjam Barang';
+                        }
+                        ?>
                         <li class="nav-item">
                             <a href="<?= site_url('barang') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-briefcase"></i>
                                 <p>
-                                    Data Barang
+                                    <?= $barang ?>
                                 </p>
                             </a>
 
@@ -216,7 +223,7 @@
                         if (userdata('role') == 1) { ?>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-table"></i>
+                                    <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         Masyarakat
                                         <i class="fas fa-angle-left right"></i>
@@ -248,7 +255,7 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-clock"></i>
                                 <p>
                                     Log Peminjaman
                                 </p>
@@ -257,7 +264,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Daftar Pengembalian
                                 </p>
@@ -266,14 +273,14 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-list"></i>
                                 <p>
                                     Record
                                 </p>
                             </a>
 
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -281,7 +288,7 @@
                                 </p>
                             </a>
 
-                        </li>
+                        </li> -->
 
                     </ul>
                 </nav>
